@@ -1,1 +1,34 @@
 /* You can add global styles to this file, and also import other style files */
+/* Dark Mode */
+.app-dark {
+  background-color: #121212; /* Koyu arka plan */
+  color: #ffffff; /* Açık yazılar */
+
+  /* PrimeNG bileşenleri için özel dark mode */
+  .p-button {
+    background-color: #1e1e1e;
+    color: #ffffff;
+    border: 1px solid #444;
+  }
+
+  .p-menubar {
+    background-color: #1e1e1e;
+    border-bottom: 1px solid #444;
+  }
+
+  .p-menubar .p-menubar-item-label {
+    color: #ffffff; /* Menubar öğe yazı rengi */
+  }
+
+  .p-card {
+    background-color: #232323;
+    color: #ffffff;
+  }
+
+  /* Input ve diğer bileşenleri koyulaştır */
+  .p-inputtext {
+    background-color: #1e1e1e;
+    color: #ffffff;
+    border: 1px solid #444;
+  }
+}

@@ -1,0 +1,35 @@
+.exercise-container {
+  padding: 20px;
+  max-width: 600px;
+  margin: auto;
+}
+
+.exercise-form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.exercise-form input {
+  flex: 1;
+}
+
+.p-datatable-dark {
+  background-color: #333;
+  color: white;
+
+  .p-datatable-thead > tr > th {
+    background-color: #444;
+    color: #fff;
+  }
+
+  .p-datatable-tbody > tr > td {
+    background-color: #333;
+    color: #fff;
+  }
+
+  .p-datatable-tbody > tr:hover {
+    background-color: #555;
+  }
+}
+

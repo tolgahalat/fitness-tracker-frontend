@@ -1,0 +1,79 @@
+<div class="exercise-container">
+  <h2>Egzersizler</h2>
+
+  <!-- "Egzersiz Ekle" Butonu -->
+  <p-button
+    label="Egzersiz Ekle"
+    icon="pi pi-plus"
+    (click)="showAddExerciseDialog()">
+  </p-button>
+
+  <!-- Modal (Diyalog Penceresi) -->
+  <p-dialog
+    [(visible)]="exerciseDialogVisible"
+    [modal]="true"
+    [header]="'Yeni Egzersiz Ekle'"
+    [style]="{'width': '30vw'}">
+
+    <div class="exercise-form">
+      <input
+        pInputText
+        [(ngModel)]="newExercise.name"
+        placeholder="Egzersiz Adı"
+        [style]="{'width':'100%'}">
+      />
+
+      <input
+        pInputText
+        [(ngModel)]="newExercise.muscleGroup"
+        placeholder="Kas Grubu"
+        [style]="{'width':'100%'}">
+      />
+
+      <p-inputNumber
+        [(ngModel)]="newExercise.rpe"
+        placeholder="RPE"
+        [min]="1"
+        [max]="10"
+        [showButtons]="true"
+        [style]="{'width':'100%'}">
+      </p-inputNumber>
+    </div>
+
+    <div>
+
+    <p-footer>
+      <p-button label="İptal" icon="pi pi-times" (click)="exerciseDialogVisible = false"></p-button>
+      <p-button label="Ekle" icon="pi pi-check" (click)="addExercise()"></p-button>
+    </p-footer>
+    </div>
+  </p-dialog>
+
+  <!-- Egzersiz Listesi -->
+  <p-table [value]="(exercises$ | async) || []" responsiveLayout="scroll">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Egzersiz</th>
+        <th>Kas Grubu</th>
+        <th>RPE</th>
+        <th>İşlem</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-exercise>
+      <tr>
+        <td>{{ exercise.name }}</td>
+        <td>{{ exercise.muscleGroup }}</td>
+        <td>{{ exercise.rpe }}</td>
+        <td>
+          <p-button
+            icon="pi pi-trash"
+            class="p-button-danger"
+            (click)="confirmDelete(exercise.id)">
+          </p-button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+
+<p-confirmDialog></p-confirmDialog>
