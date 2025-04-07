@@ -1,3 +1,5 @@
+
+
 .exercise-container {
   padding: 20px;
   max-width: 600px;
@@ -14,22 +16,60 @@
   flex: 1;
 }
 
-.p-datatable-dark {
-  background-color: #333;
-  color: white;
+//.p-datatable-dark {
+//  background-color: #333;
+//  color: white;
+//
+//  .p-datatable-thead > tr > th {
+//    background-color: #444;
+//    color: #fff;
+//  }
+//
+//  .p-datatable-tbody > tr > td {
+//    background-color: #333;
+//    color: #fff;
+//  }
+//
+//  .p-datatable-tbody > tr:hover {
+//    background-color: #555;
+//  }
+//}
 
-  .p-datatable-thead > tr > th {
-    background-color: #444;
-    color: #fff;
-  }
+//::ng-deep .p-datatable.p-datatable-dark {
+//  background-color: #333;
+//  color: #fff;
+//
+//  .p-datatable-thead > tr > th {
+//    background-color: #444;
+//    color: #fff;
+//  }
+//
+//  .p-datatable-tbody > tr > td {
+//    background-color: #333;
+//    color: #fff;
+//  }
+//
+//  .p-datatable-tbody > tr:hover {
+//    background-color: #555;
+//  }
+//}
 
-  .p-datatable-tbody > tr > td {
-    background-color: #333;
-    color: #fff;
-  }
 
-  .p-datatable-tbody > tr:hover {
-    background-color: #555;
-  }
-}
-
+//.app-dark ::ng-deep .p-datatable {
+//  background-color: #333;
+//  color: #fff;
+//
+//  .p-datatable-thead > tr > th {
+//    background-color: #444;
+//    color: #fff;
+//  }
+//
+//  .p-datatable-tbody > tr > td {
+//    background-color: #333;
+//    color: #fff;
+//  }
+//
+//  .p-datatable-tbody > tr:hover {
+//    background-color: #555;
+//  }
+//}

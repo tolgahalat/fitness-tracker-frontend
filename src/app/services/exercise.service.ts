@@ -20,4 +20,12 @@ export class ExerciseService {
     this.exercises = this.exercises.filter(ex => ex.id !== id);
     this.exercisesSubject.next([...this.exercises]);
   }
+
+  updateExercise(updatedExercise: Exercise) {
+    const index = this.exercises.findIndex(ex => ex.id === updatedExercise.id);
+    if (index !== -1) {
+      this.exercises[index] = { ...updatedExercise };
+      this.exercisesSubject.next([...this.exercises]);
+    }
+  }
 }

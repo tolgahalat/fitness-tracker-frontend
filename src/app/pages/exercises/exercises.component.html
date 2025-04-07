@@ -8,30 +8,28 @@
     (click)="showAddExerciseDialog()">
   </p-button>
 
-  <!-- Modal (Diyalog Penceresi) -->
+  <!-- Modal (Ekle / Güncelle) -->
   <p-dialog
     [(visible)]="exerciseDialogVisible"
     [modal]="true"
-    [header]="'Yeni Egzersiz Ekle'"
+    [header]="isEditing ? 'Egzersizi Güncelle' : 'Yeni Egzersiz Ekle'"
     [style]="{'width': '30vw'}">
 
     <div class="exercise-form">
       <input
         pInputText
-        [(ngModel)]="newExercise.name"
+        [(ngModel)]="selectedExercise.name"
         placeholder="Egzersiz Adı"
-        [style]="{'width':'100%'}">
-      />
+        [style]="{'width':'100%'}" />
 
       <input
         pInputText
-        [(ngModel)]="newExercise.muscleGroup"
+        [(ngModel)]="selectedExercise.muscleGroup"
         placeholder="Kas Grubu"
-        [style]="{'width':'100%'}">
-      />
+        [style]="{'width':'100%'}" />
 
       <p-inputNumber
-        [(ngModel)]="newExercise.rpe"
+        [(ngModel)]="selectedExercise.rpe"
         placeholder="RPE"
         [min]="1"
         [max]="10"
@@ -41,11 +39,14 @@
     </div>
 
     <div>
-
-    <p-footer>
-      <p-button label="İptal" icon="pi pi-times" (click)="exerciseDialogVisible = false"></p-button>
-      <p-button label="Ekle" icon="pi pi-check" (click)="addExercise()"></p-button>
-    </p-footer>
+      <p-footer>
+        <p-button label="İptal" icon="pi pi-times" (click)="exerciseDialogVisible = false"></p-button>
+        <p-button
+          [label]="isEditing ? 'Güncelle' : 'Ekle'"
+          icon="pi pi-check"
+          (click)="saveExercise()">
+        </p-button>
+      </p-footer>
     </div>
   </p-dialog>
 
@@ -65,6 +66,14 @@
         <td>{{ exercise.muscleGroup }}</td>
         <td>{{ exercise.rpe }}</td>
         <td>
+          <!-- Düzenleme Butonu -->
+          <p-button
+            icon="pi pi-pencil"
+            class="p-button-warning mr-2"
+            (click)="editExercise(exercise)">
+          </p-button>
+
+          <!-- Silme Butonu -->
           <p-button
             icon="pi pi-trash"
             class="p-button-danger"
