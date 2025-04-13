@@ -1,5 +1,5 @@
-import {Component} from '@angular/core';
-import {RouterOutlet} from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {Router, RouterOutlet} from '@angular/router';
 
 import {Menubar} from 'primeng/menubar';
 
@@ -17,12 +17,66 @@ interface MenuItem {
   imports: [RouterOutlet, Menubar],
   standalone: true
 })
-export class AppComponent {
-  menuItems: MenuItem[] = [
-    {label: 'Dashboard', icon: 'pi pi-home', routerLink: '/'},
-    {label: 'Exercises', icon: 'pi pi-dumbbell', routerLink: '/exercises'},
-    {label: 'Workout Log', icon: 'pi pi-calendar', routerLink: '/workout-log'}
-  ];
+export class AppComponent implements OnInit {
+  // menuItems: MenuItem[] = [
+  //   {label: 'Dashboard', icon: 'pi pi-home', routerLink: '/'},
+  //   {label: 'Exercises', icon: 'pi pi-dumbbell', routerLink: '/exercises'},
+  //   {label: 'Workout Log', icon: 'pi pi-calendar', routerLink: '/workout-log'}
+  // ];
+
+  menuItems: any[] = [];
+  activeRoute: string = '';
+
+  constructor(private router: Router) {
+    this.router.events.subscribe(() => {
+      this.activeRoute = this.router.url;
+      this.updateMenuItems(); // yeniden oluştur
+    });
+  }
+
+  ngOnInit() {
+    this.menuItems = [
+      {
+        label: 'Exercises',
+        routerLink: '/exercises',
+        styleClass: this.getActiveClass('/exercises'),
+      },
+      {
+        label: 'Users',
+        routerLink: '/users',
+        styleClass: this.getActiveClass('/users'),
+      },
+      {
+        label: 'Functions',
+        routerLink: '/functions',
+        styleClass: this.getActiveClass('/functions'),
+      }
+    ];
+  }
+
+  getActiveClass(path: string): string {
+    return this.activeRoute === path ? 'active-menu-item' : '';
+  }
+
+  updateMenuItems() {
+    this.menuItems = [
+      {
+        label: 'Exercises',
+        routerLink: '/exercises',
+        styleClass: this.getActiveClass('/exercises'),
+      },
+      {
+        label: 'Users',
+        routerLink: '/users',
+        styleClass: this.getActiveClass('/users'),
+      },
+      {
+        label: 'Functions',
+        routerLink: '/functions',
+        styleClass: this.getActiveClass('/functions'),
+      }
+    ];
+  }
 
   // isDarkMode = true;
   //

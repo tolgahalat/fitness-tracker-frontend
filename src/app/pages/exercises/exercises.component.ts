@@ -10,6 +10,9 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ConfirmationService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DialogModule } from 'primeng/dialog';
+import {Slider} from 'primeng/slider';
+import {DropdownModule} from 'primeng/dropdown';
+import {Select} from 'primeng/select';
 
 @Component({
   selector: 'app-exercises',
@@ -23,7 +26,10 @@ import { DialogModule } from 'primeng/dialog';
     InputNumberModule,
     InputTextModule,
     ConfirmDialogModule,
-    DialogModule
+    DialogModule,
+    Slider,
+    DropdownModule,
+    Select
   ],
   providers: [ConfirmationService],
   standalone: true
@@ -40,6 +46,16 @@ export class ExercisesComponent {
     rpe: 0
   };
 
+  muscleGroups = [
+    { label: 'Chest', value: 'chest' },
+    { label: 'Back', value: 'back' },
+    { label: 'Legs', value: 'legs' },
+    { label: 'Arms', value: 'arms' },
+    { label: 'Shoulders', value: 'shoulders' },
+    { label: 'Core', value: 'core' }
+  ];
+
+
   constructor(
     private exerciseService: ExerciseService,
     private confirmationService: ConfirmationService
@@ -53,7 +69,7 @@ export class ExercisesComponent {
       id: 0,
       name: '',
       muscleGroup: '',
-      rpe: 0
+      rpe: 5
     };
     this.exerciseDialogVisible = true;
   }

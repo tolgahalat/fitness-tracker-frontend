@@ -13,40 +13,78 @@
     [(visible)]="exerciseDialogVisible"
     [modal]="true"
     [header]="isEditing ? 'Egzersizi Güncelle' : 'Yeni Egzersiz Ekle'"
-    [style]="{'width': '30vw'}">
+    [style]="{'width': '30vw', 'height': '35vh'}">
 
     <div class="exercise-form">
-      <input
-        pInputText
-        [(ngModel)]="selectedExercise.name"
-        placeholder="Egzersiz Adı"
-        [style]="{'width':'100%'}" />
+      <div class="row">
+        <input
+          pInputText
+          [(ngModel)]="selectedExercise.name"
+          placeholder="Egzersiz Adı"
+          [style]="{'width':'100%'}"/>
 
-      <input
-        pInputText
-        [(ngModel)]="selectedExercise.muscleGroup"
-        placeholder="Kas Grubu"
-        [style]="{'width':'100%'}" />
+        <!--        <input-->
+        <!--          pInputText-->
+        <!--          [(ngModel)]="selectedExercise.muscleGroup"-->
+        <!--          placeholder="Kas Grubu"-->
+        <!--          [style]="{'width':'100%'}" />-->
 
-      <p-inputNumber
-        [(ngModel)]="selectedExercise.rpe"
-        placeholder="RPE"
-        [min]="1"
-        [max]="10"
-        [showButtons]="true"
-        [style]="{'width':'100%'}">
-      </p-inputNumber>
+        </div>
+
+      <div class="row">
+<!--        todo: p-select olarak değiştirilecek.-->
+        <p-dropdown
+          [options]="muscleGroups"
+          [(ngModel)]="selectedExercise.muscleGroup"
+          placeholder="Kas Grubu Seçin"
+        ></p-dropdown>
+
+      </div>
     </div>
 
-    <div>
+    <div class="card flex justify-center">
+      <div class="row" [style]="{ width: '95%' }">
+<!--        <div class="col-md-4"><label>RPE</label></div>-->
+        <div class="col-md-8">
+          <p-slider
+            [(ngModel)]="selectedExercise.rpe"
+            [min]="1"
+            [max]="10"
+            [step]="1"
+            [style]="{ width: '100%' }"
+          ></p-slider>
+<!--          <small>RPE: {{ selectedExercise.rpe }}</small>-->
+<!--          <input-->
+<!--            pInputText-->
+<!--            placeholder="{{ selectedExercise.rpe }}"-->
+<!--            [style]="{'width':'100%'}"/>-->
+        </div>
+        <div style="padding-top: 5px">
+          <input type="text" pInputText placeholder="Zorluk: {{ selectedExercise.rpe }}" class="w-full mb-4" [style]="{ width: '100%' }" disabled/>
+        </div>
+      </div>
+
+      <!--      <p-inputNumber-->
+      <!--        [(ngModel)]="selectedExercise.rpe"-->
+      <!--        placeholder="RPE"-->
+      <!--        [min]="1"-->
+      <!--        [max]="10"-->
+      <!--        [showButtons]="true"-->
+      <!--        [style]="{'width':'100%'}">-->
+      <!--      </p-inputNumber>-->
+
+
+
+    <div style="padding-top: 25px">
       <p-footer>
-        <p-button label="İptal" icon="pi pi-times" (click)="exerciseDialogVisible = false"></p-button>
         <p-button
           [label]="isEditing ? 'Güncelle' : 'Ekle'"
           icon="pi pi-check"
           (click)="saveExercise()">
         </p-button>
+        <p-button label="İptal" icon="pi pi-times" (click)="exerciseDialogVisible = false"></p-button>
       </p-footer>
+    </div>
     </div>
   </p-dialog>
 
@@ -56,7 +94,7 @@
       <tr>
         <th>Egzersiz</th>
         <th>Kas Grubu</th>
-        <th>RPE</th>
+        <th>Zorluk</th>
         <th>İşlem</th>
       </tr>
     </ng-template>
@@ -69,14 +107,14 @@
           <!-- Düzenleme Butonu -->
           <p-button
             icon="pi pi-pencil"
-            class="p-button-warning mr-2"
+            class="p-button-default mr-2"
             (click)="editExercise(exercise)">
           </p-button>
 
           <!-- Silme Butonu -->
           <p-button
             icon="pi pi-trash"
-            class="p-button-danger"
+            class="p-button-default"
             (click)="confirmDelete(exercise.id)">
           </p-button>
         </td>
