@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {Router, RouterOutlet} from '@angular/router';
 
 import {Menubar} from 'primeng/menubar';
+import {LayoutService} from './services/layout.service';
+import {Button} from 'primeng/button';
 
 interface MenuItem {
   label: string;
@@ -14,20 +16,20 @@ interface MenuItem {
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  imports: [RouterOutlet, Menubar],
+  imports: [RouterOutlet, Menubar, Button],
   standalone: true
 })
 export class AppComponent implements OnInit {
-  // menuItems: MenuItem[] = [
-  //   {label: 'Dashboard', icon: 'pi pi-home', routerLink: '/'},
-  //   {label: 'Exercises', icon: 'pi pi-dumbbell', routerLink: '/exercises'},
-  //   {label: 'Workout Log', icon: 'pi pi-calendar', routerLink: '/workout-log'}
-  // ];
+
+  toggleDarkMode() {
+    this.layoutService.layoutConfig.update((state) => ({ ...state, darkTheme: !state.darkTheme }));
+  }
 
   menuItems: any[] = [];
   activeRoute: string = '';
 
-  constructor(private router: Router) {
+  constructor(private router: Router,
+              public layoutService: LayoutService) {
     this.router.events.subscribe(() => {
       this.activeRoute = this.router.url;
       this.updateMenuItems(); // yeniden oluştur
